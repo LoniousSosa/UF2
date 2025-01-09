@@ -1,9 +1,4 @@
 package com.example;
-/**
- * Hello world!
- *
- */
-
 public class App extends Thread
 {
     int contador;
@@ -19,12 +14,20 @@ public class App extends Thread
 
         a.start();
         b.start();
+        
+        
     }
 
     @Override
     public void run(){
         while (contador <9) {
             contador++;
+            try {
+                this.sleep(5);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             System.out.println(this.getName() + " " + this.contador);
         }
         System.out.println("Termina el fil " + this.getName());
