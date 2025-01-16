@@ -27,7 +27,6 @@ public class DormAleatori extends Thread {
             try {
                 sleep(randomNumber);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
