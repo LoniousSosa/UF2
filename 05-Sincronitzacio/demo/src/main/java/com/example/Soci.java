@@ -2,6 +2,13 @@ package com.example;
 
 import java.util.Random;
 
+/**
+ * 
+ * Se me olvidó hacer el commit con el mensaje sin sincronización así que 
+ * el código sin sincronización está en el README.md
+ * 
+ */
+
 public class Soci extends Thread {
     
     Compte compte;
@@ -20,11 +27,15 @@ public class Soci extends Thread {
     }
 
     public void run() {
+        float saldoGeneral = 0;
         for (int i = 0; i < maxAnys; i++) {
             for (int j = 0; j < 12; j++) {
                 if (j % 2 == 0) {
-                    compte.setSaldo(compte.getSaldo()+aportacio);
-                }else compte.setSaldo(compte.getSaldo()-aportacio);
+                    saldoGeneral= compte.getSaldo()+aportacio;
+                    compte.setSaldo(saldoGeneral);
+                }else {
+                    saldoGeneral = compte.getSaldo()-aportacio;
+                    compte.setSaldo(saldoGeneral);}
             try {
                 this.sleep(random.nextInt(esperaMax));
             } catch (InterruptedException e) {

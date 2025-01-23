@@ -15,8 +15,8 @@ public class Associacio {
 
     public static void main(String[] args) {
         Associacio associacio = new Associacio();
-        associacio.esperaPeriodeSocis();
         associacio.iniciaCompteTempsSocis();
+        associacio.esperaPeriodeSocis();
         associacio.mostraBalancComptes();
     }
 
@@ -38,6 +38,7 @@ public class Associacio {
     }
 
     public void mostraBalancComptes(){
-        System.out.println("Saldo: " + socis[0].getCompte().getSaldo());
+        Soci soci = new Soci("Soci vacio");
+        System.out.println("Saldo " +soci.compte.getSaldo());
     }
 }
