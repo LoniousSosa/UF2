@@ -22,11 +22,15 @@ public class Soci extends Thread {
     }
 
     public void run() {
+        float saldoGeneral = 0;
         for (int i = 0; i < maxAnys; i++) {
             for (int j = 0; j < 12; j++) {
                 if (j % 2 == 0) {
-                    compte.setSaldo(compte.getSaldo()+aportacio);
-                }else compte.setSaldo(compte.getSaldo()-aportacio);
+                    saldoGeneral= compte.getSaldo()+aportacio;
+                    compte.setSaldo(saldoGeneral);
+                }else {
+                    saldoGeneral = compte.getSaldo()-aportacio;
+                    compte.setSaldo(saldoGeneral);}
             try {
                 this.sleep(random.nextInt(esperaMax));
             } catch (InterruptedException e) {
@@ -90,8 +94,8 @@ public class Associacio {
 
     public static void main(String[] args) {
         Associacio associacio = new Associacio();
-        associacio.esperaPeriodeSocis();
         associacio.iniciaCompteTempsSocis();
+        associacio.esperaPeriodeSocis();
         associacio.mostraBalancComptes();
     }
 
