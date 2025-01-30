@@ -30,6 +30,7 @@ public class Soci extends Thread {
         float saldoGeneral = 0;
         for (int i = 0; i < maxAnys; i++) {
             for (int j = 0; j < 12; j++) {
+                System.out.println(compte.getSaldo());
                 if (j % 2 == 0) {
                     saldoGeneral= compte.getSaldo()+aportacio;
                     compte.setSaldo(saldoGeneral);
@@ -53,7 +54,5 @@ public class Soci extends Thread {
 
     public void setCompte(Compte compte) {
         this.compte = compte;
-    }
-
-    
+    } 
 }

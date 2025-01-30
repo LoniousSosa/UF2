@@ -9,16 +9,15 @@ public class Compte {
         this.saldo = 0;
     }
 
-    public float getSaldo() {
+    public synchronized float getSaldo() {
         return saldo;
     }
 
-    synchronized
-    public void setSaldo(float saldo) {
+    public synchronized void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 
-    public static Compte instanciaCompte(){
+    public static synchronized Compte instanciaCompte(){
         if (instanciaCompte == null) {
             instanciaCompte = new Compte();
         }
