@@ -36,6 +36,7 @@ public class Soci extends Thread {
                 }else {
                     saldoGeneral = compte.getSaldo()-aportacio;
                     compte.setSaldo(saldoGeneral);}
+
             try {
                 this.sleep(random.nextInt(esperaMax));
             } catch (InterruptedException e) {
