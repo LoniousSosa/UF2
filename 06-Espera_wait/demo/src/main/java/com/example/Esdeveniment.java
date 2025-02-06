@@ -60,7 +60,7 @@ public class Esdeveniment {
         while (plazasDisponibles == 0) {
             try {
                 wait(5000);
-                return; // Espera hasta 5 segundos antes de volver a intentar
+                return;
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 
