@@ -17,15 +17,16 @@ public class Assistent extends Thread{
     @Override
     public void run() {
         while (true) {
+            try {
+                Thread.sleep(sleepTime.nextInt(1000));
+            
             int numRandom = new Random().nextInt(2);
             if (numRandom ==0) {
                 esdeveniment.ferReserva(this);
             }else {
                 esdeveniment.cancelaReserva(this);}
 
-            try {
-                this.sleep(sleepTime.nextInt(1000));
-            } catch (InterruptedException e) {
+            }catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }

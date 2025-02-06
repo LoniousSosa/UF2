@@ -15,6 +15,7 @@ public class Esdeveniment {
     private static Esdeveniment instanciaEsdeveniment;
     
     private Esdeveniment(){
+        this.plazasDisponibles = maxPlazas;
         listaAssistents = new ArrayList<>();
     }
 
@@ -56,46 +57,29 @@ public class Esdeveniment {
 
 
     public synchronized void ferReserva(Assistent assistent){
-        if (plazasDisponibles==0) {
-                try {
-                    assistent.wait();
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-        }
-        else{
-            setMaxPlazas(plazasDisponibles--);
-
-            
-            System.out.println(assistent.getName() + " ha fet una reserva. Places disponibles " 
-            + plazasDisponibles);
-
-            for (Assistent a : listaAssistents) {
-                if (a==assistent) {
-                    break;
-                }
+        while (plazasDisponibles == 0) {
+            try {
+                wait(5000);
+                return; // Espera hasta 5 segundos antes de volver a intentar
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                
             }
-            listaAssistents.add(assistent);
         }
+        plazasDisponibles--;
+        listaAssistents.add(assistent);       
+        System.out.println(assistent.getName() + " ha fet una reserva. Places disponibles "+ plazasDisponibles);
     }
 
     public synchronized void cancelaReserva(Assistent assistent){
-        for (Assistent a : listaAssistents) {
-            if (assistent == a) {
-                notifyAll();
-                listaAssistents.remove(a);
-                if (plazasDisponibles<5) {
-                    setMaxPlazas(plazasDisponibles++);
-                }
+        if (listaAssistents.remove(assistent)) {
+            if (plazasDisponibles < maxPlazas) {
+                plazasDisponibles++;    
 
-                
-                  System.out.println(assistent.getName()+ " ha cancel·lat una reserva. Places disponibles "
+            }
+                System.out.println(assistent.getName()+ " ha cancel·lat una reserva. Places disponibles "
                 + plazasDisponibles);
-                
-                
-                break;
-            }     
-        }
+            notifyAll();
+        }else System.out.println("La reserva no existeig. Places disponibles " + plazasDisponibles );
     }
 }
