@@ -21,7 +21,7 @@ public class Taula {
     }
 
     public static void main(String[] args) {
-        Taula taula = new Taula(5);
+        Taula taula = new Taula(4);
         taula.showTaula();
         taula.cridarATaula();
     }
@@ -35,6 +35,15 @@ public class Taula {
     }
 
     public void cridarATaula(){
+        for (Filosof filosof : comensals) {
+            try {
+                filosof.join();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
         for (Filosof filosof : comensals) {
             filosof.start();
         }
