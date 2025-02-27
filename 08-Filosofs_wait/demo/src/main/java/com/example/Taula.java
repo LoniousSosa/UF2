@@ -15,7 +15,7 @@ public class Taula {
         }
         for (int i = 0; i < num; i++) {
             if (i != num-1) {
-                comensals.add(new Filosof("Filòsof "+ i, i, forquilles.get(i),forquilles.get(i+1)));
+                comensals.add(new Filosof("Filòsof "+ i, i,forquilles.get(i),forquilles.get(i+1)));
             }else comensals.add(new Filosof("Filòsof "+ i, i,forquilles.get(i),forquilles.get(0)));
         }
     }
@@ -28,7 +28,7 @@ public class Taula {
 
     public void showTaula(){
         for (Filosof filosof : comensals) {
-            System.out.println("Comensal:fil"+(filosof.getId() -19)+" esq:"+ filosof.getForquillaEsquerra().getNumForquilla()
+            System.out.println("Comensal:fil"+(filosof.getNumComensal())+" esq:"+ filosof.getForquillaEsquerra().getNumForquilla()
             + " dret:" + filosof.getForquillaDreta().getNumForquilla());
         }
         System.out.println("-------------------------------");

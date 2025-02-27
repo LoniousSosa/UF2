@@ -26,7 +26,7 @@ public class Filosof extends Thread{
         }
         else{
             System.out.println(getFullInfo() + " deixa l'esquerra" + forquillaEsquerra.getNumForquilla() +
-            " i espera (dreta ocupada)");
+            " i espera (dreta)");
             forquillaEsquerra.setEnUs(false);
         }
         if (!this.forquillaDreta.isEnUs()) {
@@ -44,7 +44,6 @@ public class Filosof extends Thread{
                 e.printStackTrace();
             }
             forquillasEnLaMa = 0;
-            gana = 0;
             forquillaEsquerra.setEnUs(false);
             forquillaDreta.setEnUs(false);
             System.out.println(getFullInfo() + " ha acabat de menjar");
