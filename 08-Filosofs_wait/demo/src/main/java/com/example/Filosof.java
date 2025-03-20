@@ -7,6 +7,7 @@ public class Filosof extends Thread {
     private int gana = 0;
     private int numComensal;
     private final Random random = new Random();
+    private boolean sortir = false;
 
     public Filosof(String name, int numComensal, Forquilla forquillaE, Forquilla forquillaD) {
         super(name);
@@ -38,15 +39,10 @@ public class Filosof extends Thread {
     }
 
     private synchronized boolean agafarForquilles() {
-        if (agafarForquillaEsquerra()) {
-            if (agafarForquillaDreta()) {
-                return true;
-            } else {
-                deixarForquilles();
-            }
+        if (agafarForquillaEsquerra() && agafarForquillaDreta()) {
+            return true;
         }
         else{
-
             deixarForquilles();
         }
         return false;
@@ -55,7 +51,7 @@ public class Filosof extends Thread {
     private boolean agafarForquillaEsquerra() {
         while (forquillaEsquerra.getPropietari() != forquillaEsquerra.getLLIURE()) {
                 try {
-                    wait(5000);
+                    wait();
                     return false;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -70,7 +66,7 @@ public class Filosof extends Thread {
     private boolean agafarForquillaDreta() {
         while (forquillaDreta.getPropietari() != forquillaDreta.getLLIURE()) {
             try {
-                wait(5000);
+                wait();
                 return false;
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -108,16 +104,19 @@ public class Filosof extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (!sortir) {
             menjar();
             pensar();
-            if (gana >= 5) {
-                System.out.println(super.getName() + " ha muerto de inanición.");
-                break;
-            }
+            setSortir();
         }
     }
 
+    public void setSortir(){
+        if (gana >= 5) {
+            System.out.println(super.getName() + " ha muerto de inanición.");
+            sortir = false;
+        }
+    }
     public String getFullInfo(){
         return super.getName() + ": fil" + this.getNumComensal();
     }

@@ -35,14 +35,6 @@ public class Taula {
     }
 
     public void cridarATaula(){
-        for (Filosof filosof : comensals) {
-            try {
-                filosof.join();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
 
         for (Filosof filosof : comensals) {
             filosof.start();
